@@ -1,0 +1,21 @@
+# One file = one experiment. Copy this file and edit it to start a new run.
+experiment: seatbelt_yolo11s_960_v1
+model: yolo11s.pt          # pretrained starting weights
+
+data:
+  source: roboflow
+  workspace: YOUR_WORKSPACE   # from the dataset URL: universe.roboflow.com/<workspace>/<project>
+  project: YOUR_PROJECT
+  version: 1
+  format: yolov11             # use yolov8 if yolov11 is not offered
+
+train:
+  imgsz: 960                  # belts are small, so train above 640
+  epochs: 100
+  batch: 16
+  patience: 20                # stop early if validation stops improving
+  seed: 0
+  hsv_v: 0.6                  # stronger brightness jitter for night images
+
+wandb:
+  project: road-violations
